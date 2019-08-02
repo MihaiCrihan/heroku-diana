@@ -9,40 +9,16 @@ const usersRouter = require('./routes/users')
 
 const app = express()
 const io = socket_io()
-const chromeMsg = []
-const firefoxMsg = []
-const operaMsg = []
+const messages = []
 app.io = io
 
-io.of('/Chrome').on('connection', socket => {
-    console.log('chrome')
-    socket.emit('newMessages', chromeMsg)
+io.of('/messages').on('connection', socket => {
+    socket.emit('newMessages', messages)
     socket.on('createNotification', data => {
         let date = new Date()
-        chromeMsg.push(data)
+        messages.push(data)
         data.date = `${date.getHours()}:${date.getMinutes()}`
         socket.emit('newMessages', data)
-    })
-})
-
-io.of('/OPR').on('connection', socket => {
-    console.log('opera')
-    socket.emit('newMessages', operaMsg)
-    socket.on('createNotification', data => {
-        let date = new Date()
-        operaMsg.push(data)
-        data.date = `${date.getHours()}:${date.getMinutes()}`
-        socket.broadcast.emit('newMessages', data)
-    })
-})
-
-io.of('/Firefox').on('connection', socket => {
-    console.log('firefox')
-    socket.emit('newMessages', firefoxMsg)
-    socket.on('createNotification', data => {
-        let date = new Date()
-        firefoxMsg.push(data)
-        data.date = `${date.getHours()}:${date.getMinutes()}`
         socket.broadcast.emit('newMessages', data)
     })
 })
