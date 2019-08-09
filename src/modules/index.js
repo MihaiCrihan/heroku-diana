@@ -1,5 +1,5 @@
-const countryRoutes = require('./country/routes');
+const countries = require('./countries/routes');
 
 module.exports = app => {
-  countryRoutes(app);
+  countries(app);
 };
