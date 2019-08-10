@@ -1,7 +1,7 @@
-const CountriesModel = require('../models/countries.model');
+const RegionsModel = require('../models/regions.model');
 
 exports.create = (req, res) => {
-  CountriesModel
+  RegionsModel
     .create(req.body)
     .then(result => {
       res.status(200).send(result);
@@ -12,7 +12,7 @@ exports.create = (req, res) => {
 };
 
 exports.schema = (req, res) => {
-  CountriesModel
+  RegionsModel
     .schema()
     .then(result => {
       res.status(200).send(result);
@@ -23,7 +23,7 @@ exports.schema = (req, res) => {
 };
 
 exports.store = (req, res) => {
-  CountriesModel
+  RegionsModel
     .store()
     .then(result => {
       res.status(200).send(result);
@@ -34,7 +34,7 @@ exports.store = (req, res) => {
 };
 
 exports.get = (req, res) => {
-  CountriesModel
+  RegionsModel
     .get(req.params.id)
     .then(result => {
       res.status(200).send(result);
@@ -45,7 +45,7 @@ exports.get = (req, res) => {
 };
 
 exports.patch = (req, res) => {
-  CountriesModel
+  RegionsModel
     .patch(req.body, req.params.id)
     .then(result => {
       res.status(200).send(result);

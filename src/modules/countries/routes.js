@@ -2,18 +2,18 @@ const CountriesController = require('./controllers/countries.controller');
 
 module.exports = app => {
   app.post('/countries', [
-    CountriesController.insert
+    CountriesController.create
   ]);
   app.get('/countries/create', [
     CountriesController.schema
   ]);
   app.get('/countries', [
-    CountriesController.list
+    CountriesController.store
   ]);
   app.get('/countries/:id', [
-    CountriesController.getById
+    CountriesController.get
   ]);
   app.patch('/countries/:id', [
-    CountriesController.patchById
+    CountriesController.patch
   ]);
 };
