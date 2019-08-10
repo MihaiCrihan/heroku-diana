@@ -1,7 +1,7 @@
-exports.create = country => {
+exports.create = region => {
   return new Promise(resolve => {
     resolve({
-      text: country.name_en,
+      text: region.name_en,
       value: 23
     })
   })
@@ -64,7 +64,7 @@ exports.schema = () => {
 };
 
 exports.store = () => {
-  const countries = [
+  const regions = [
     {
       value: 1,
       text: 'lol'
@@ -96,7 +96,7 @@ exports.store = () => {
   ]
 
   return new Promise(resolve => {
-    resolve(countries)
+    resolve(regions)
   })
 };
 
@@ -109,10 +109,10 @@ exports.get = id => {
   })
 };
 
-exports.patch = (country, id) => {
+exports.patch = (region, id) => {
   return new Promise(resolve => {
     resolve({
-      text: country.name_en,
+      text: region.name_en,
       value: id
     })
   })
