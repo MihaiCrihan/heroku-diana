@@ -1,10 +1,10 @@
-const app = express()
 const logger = require('morgan')
 const express = require('express')
 const socket_io = require('socket.io')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 
+const app = express()
 app.io = socket_io()
 
 app.use(bodyParser.urlencoded({extended: false}))
