@@ -13,6 +13,9 @@ module.exports = app => {
   app.get('/countries/:id', [
     CountriesController.get
   ]);
+  app.get('/countries/:id/edit', [
+    CountriesController.edit
+  ]);
   app.patch('/countries/:id', [
     CountriesController.patch
   ]);
