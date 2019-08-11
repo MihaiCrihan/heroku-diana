@@ -1,7 +1,7 @@
 module.exports = app => {
   let messages = []
   const prepareData = (data) => {
-    let date = new Date()
+    const date = new Date()
     data.date = `${date.getHours()}:${date.getMinutes()}`
 
     if (messages.length > 1) {
@@ -28,4 +28,4 @@ module.exports = app => {
       callback()
     })
   })
-};
+}

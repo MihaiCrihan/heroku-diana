@@ -1,76 +1,76 @@
-const connect = require(`../../../db/mongo`);
+const connect = require(`../../../db/mongo`)
 
 exports.create = country => {
   return new Promise(resolve => {
     connect.then(db => {
-      db.collection('countries').insert(country, (err, result) => {
-        resolve(result.ops[0])
-      });
+      db.collection('countries').insertOne(country, (err, result) => {
+        resolve(result)
+      })
     })
   })
-};
+}
 
 exports.schema = () => {
   const form = {
     schema: {
-      "title": "Test form title",
-      "description": "Test form description",
-      "fields": {
-        'regions': {
-          'name': 'regions',
-          'title': 'Regions field',
-          'description': '',
-          'rules': '',
-          'props': {
-            'type': 'select',
-            'multiple': true,
+      title: 'Test form title',
+      description: 'Test form description',
+      fields: {
+        regions: {
+          name: 'regions',
+          title: 'Regions field',
+          description: '',
+          rules: '',
+          props: {
+            type: 'select',
+            multiple: true,
             mutable: true
           },
-          'component': 'select',
-          'data': [
+          component: 'select',
+          data: [
             {
-              'value': 1,
-              'text': 'Regions 1'
+              value: 1,
+              text: 'Regions 1'
             },
             {
-              'value': 2,
-              'text': 'Regions 2'
+              value: 2,
+              text: 'Regions 2'
             }
           ]
         },
-        "name_en": {
-          "name": "name_en",
-          "title": "Name(EN)",
-          "description": "Name(EN) field",
-          "rules": "required|min:1|max:50|unique_with:countries,code,name_ro,name_ru",
-          "props": {
-            "type": "text"
+        name_en: {
+          name: 'name_en',
+          title: 'Name(EN)',
+          description: 'Name(EN) field',
+          rules: 'required|min:1|max:50|unique_with:countries,code,name_ro,name_ru',
+          props: {
+            type: 'text'
           },
-          "component": "input"
+          component: 'input'
         },
-        "name_ro": {
-          "name": "name_ro",
-          "title": "Name(RO)",
-          "description": "Name(RO) field",
-          "rules": "required|min:1|max:50|unique_with:countries,name_en,code,name_ru",
-          "props": {
-            "type": "text"
+        name_ro: {
+          name: 'name_ro',
+          title: 'Name(RO)',
+          description: 'Name(RO) field',
+          rules: 'required|min:1|max:50|unique_with:countries,name_en,code,name_ru',
+          props: {
+            type: 'text'
           },
-          "component": "input"
+          component: 'input'
         },
-        "name_ru": {
-          "name": "name_ru",
-          "title": "Name(RU)",
-          "description": "Name(RU) field",
-          "rules": "required|min:1|max:50|unique_with:countries,name_en,name_ro,code",
-          "props": {
-            "type": "text"
+        name_ru: {
+          name: 'name_ru',
+          title: 'Name(RU)',
+          description: 'Name(RU) field',
+          rules: 'required|min:1|max:50|unique_with:countries,name_en,name_ro,code',
+          props: {
+            type: 'text'
           },
-          "component": "input"
+          component: 'input'
         }
       },
-      "params": {
-        "created_at": 1565379789
+      params: {
+        created_at: 1565379789
       }
     }
   }
@@ -78,7 +78,7 @@ exports.schema = () => {
   return new Promise(resolve => {
     resolve(form)
   })
-};
+}
 
 exports.store = () => {
   const countries = [
@@ -115,7 +115,7 @@ exports.store = () => {
   return new Promise(resolve => {
     resolve(countries)
   })
-};
+}
 
 exports.get = id => {
   return new Promise(resolve => {
@@ -124,69 +124,69 @@ exports.get = id => {
       text: 'lol'
     })
   })
-};
+}
 
 exports.edit = id => {
   const form = {
     schema: {
-      "title": "Test form title",
-      "description": "Test form description",
-      "fields": {
-        'regions': {
-          'name': 'regions',
-          'title': 'Regions field',
-          'description': '',
-          'rules': '',
-          'props': {
-            'type': 'select',
-            'multiple': true,
+      title: 'Test form title',
+      description: 'Test form description',
+      fields: {
+        regions: {
+          name: 'regions',
+          title: 'Regions field',
+          description: '',
+          rules: '',
+          props: {
+            type: 'select',
+            multiple: true,
             mutable: true
           },
-          'component': 'select',
-          'data': [
+          component: 'select',
+          data: [
             {
-              'value': 1,
-              'text': 'Regions 1'
+              value: 1,
+              text: 'Regions 1'
             },
             {
-              'value': 2,
-              'text': 'Regions 2'
+              value: 2,
+              text: 'Regions 2'
             }
           ]
         },
-        "name_en": {
-          "name": "name_en",
-          "title": "Name(EN)",
-          "description": "Name(EN) field",
-          "rules": "required|min:1|max:50|unique_with:countries,code,name_ro,name_ru",
-          "props": {
-            "type": "text"
+        name_en: {
+          name: 'name_en',
+          title: 'Name(EN)',
+          description: 'Name(EN) field',
+          rules: 'required|min:1|max:50|unique_with:countries,code,name_ro,name_ru',
+          props: {
+            type: 'text'
           },
-          "component": "input"
+          component: 'input'
         },
-        "name_ro": {
-          "name": "name_ro",
-          "title": "Name(RO)",
-          "description": "Name(RO) field",
-          "rules": "required|min:1|max:50|unique_with:countries,name_en,code,name_ru",
-          "props": {
-            "type": "text"
+        name_ro: {
+          name: 'name_ro',
+          title: 'Name(RO)',
+          description: 'Name(RO) field',
+          rules: 'required|min:1|max:50|unique_with:countries,name_en,code,name_ru',
+          props: {
+            type: 'text'
           },
-          "component": "input"
+          component: 'input'
         },
-        "name_ru": {
-          "name": "name_ru",
-          "title": "Name(RU)",
-          "description": "Name(RU) field",
-          "rules": "required|min:1|max:50|unique_with:countries,name_en,name_ro,code",
-          "props": {
-            "type": "text"
+        name_ru: {
+          name: 'name_ru',
+          title: 'Name(RU)',
+          description: 'Name(RU) field',
+          rules: 'required|min:1|max:50|unique_with:countries,name_en,name_ro,code',
+          props: {
+            type: 'text'
           },
-          "component": "input"
+          component: 'input'
         }
       },
-      "params": {
-        "created_at": 1565379789
+      params: {
+        created_at: 1565379789
       }
     },
     dataObject: {
@@ -200,7 +200,7 @@ exports.edit = id => {
   return new Promise(resolve => {
     resolve(form)
   })
-};
+}
 
 exports.patch = (country, id) => {
   return new Promise(resolve => {
@@ -209,4 +209,4 @@ exports.patch = (country, id) => {
       value: id
     })
   })
-};
+}
