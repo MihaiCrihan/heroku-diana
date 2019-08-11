@@ -1,8 +1,13 @@
-const db = require(`../../../db/mongo`);
+const connect = require(`../../../db/mongo`);
 
 exports.create = country => {
-  console.log(db)
-  db.collection('countries').insert(country, (err, result) => {});
+  return new Promise(resolve => {
+    connect.then(db => {
+      db.collection('countries').insert(country, (err, result) => {
+        resolve(result.ops[0])
+      });
+    })
+  })
 };
 
 exports.schema = () => {
