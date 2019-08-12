@@ -12,15 +12,10 @@ app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*')
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type,x-localization,authorization')
-  res.setHeader('Access-Control-Allow-Credentials', true)
-  next()
-})
 
-require('./modules')(app)
+require('./database/connect')()
+require('./middleware/global')(app)
+require('./routes')(app)
 require('./socket')(app)
 
 module.exports = app
