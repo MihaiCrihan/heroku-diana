@@ -52,6 +52,13 @@ exports.getCreateSchema = async (req, res) => {
               type: 'text'
             },
             component: 'input'
+          },
+          barcode: {
+            name: 'barcode',
+            title: 'barcode',
+            description: 'barcode',
+            rules: '',
+            component: 'barcode'
           }
         },
         params: {
@@ -81,7 +88,59 @@ exports.getUpdateSchema = async (req, res) => {
       dataObject: {
         id,
         name,
-        cities
+        cities,
+        barcode: [
+          {
+            code: 'EAN8',
+            barcode: '12345678',
+            mask: '########'
+          },
+          {
+            code: 'EAN8',
+            barcode: '12345678',
+            mask: '########'
+          },
+          {
+            code: 'EAN8',
+            barcode: '12345678',
+            mask: '########'
+          },
+          {
+            code: 'EAN8',
+            barcode: '12345678',
+            mask: '########'
+          },
+          {
+            code: 'EAN8',
+            barcode: '12345678',
+            mask: '########'
+          },
+          {
+            code: 'EAN8',
+            barcode: '12345678',
+            mask: '########'
+          },
+          {
+            code: 'EAN8',
+            barcode: '12345678',
+            mask: '########'
+          },
+          {
+            code: 'EAN8',
+            barcode: '12345678',
+            mask: '########'
+          },
+          {
+            code: 'EAN8',
+            barcode: '12345678',
+            mask: '########'
+          },
+          {
+            code: 'EAN8',
+            barcode: '12345678',
+            mask: '########'
+          }
+        ]
       },
       schema: {
         title: 'Test form title',
@@ -110,6 +169,13 @@ exports.getUpdateSchema = async (req, res) => {
               type: 'text'
             },
             component: 'input'
+          },
+          barcode: {
+            name: 'barcode',
+            title: 'barcode',
+            description: 'barcode',
+            rules: '',
+            component: 'barcode'
           }
         },
         params: {
