@@ -58,7 +58,9 @@ exports.getCreateSchema = async (req, res) => {
             title: 'barcode',
             description: 'barcode',
             rules: '',
-            component: 'barcode'
+            props: [],
+            component: 'barcode',
+            formats: ['EAN8', 'EAN13']
           }
         },
         params: {
@@ -291,7 +293,9 @@ exports.getUpdateSchema = async (req, res) => {
             title: 'barcode',
             description: 'barcode',
             rules: '',
-            component: 'barcode'
+            props: [],
+            component: 'barcode',
+            formats: ['EAN8', 'EAN13']
           }
         },
         params: {
