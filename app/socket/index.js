@@ -1,5 +1,9 @@
 module.exports = app => {
   let messages = []
+  const caches = {
+    all: [],
+    pushed: []
+  }
   const prepareData = (data) => {
     const date = new Date()
     data.date = `${date.getHours()}:${date.getMinutes()}`
@@ -28,4 +32,17 @@ module.exports = app => {
       callback()
     })
   })
+
+  app.io.of('/caches')
+    .on('connection', socket => {
+      socket.on('push', data => {
+        caches.all.push(prepareData(data))
+        caches.pushed = prepareData(data)
+        socket.emit('updated', caches.pushed)
+        socket.broadcast.emit('updated', caches.pushed)
+      })
+      socket.on('get', () => {
+        socket.emit('updated', caches)
+      })
+    })
 }
