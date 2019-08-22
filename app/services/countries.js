@@ -52,15 +52,6 @@ exports.getCreateSchema = async (req, res) => {
               type: 'text'
             },
             component: 'input'
-          },
-          barcode: {
-            name: 'barcode',
-            title: 'barcode',
-            description: 'barcode',
-            rules: '',
-            props: [],
-            component: 'barcode',
-            formats: ['EAN8', 'EAN13']
           }
         },
         params: {
@@ -90,59 +81,7 @@ exports.getUpdateSchema = async (req, res) => {
       dataObject: {
         id,
         name,
-        cities,
-        barcode: [
-          {
-            code: 'EAN8',
-            barcode: '12345678',
-            mask: '########'
-          },
-          {
-            code: 'EAN8',
-            barcode: '12345678',
-            mask: '########'
-          },
-          {
-            code: 'EAN8',
-            barcode: '12345678',
-            mask: '########'
-          },
-          {
-            code: 'EAN8',
-            barcode: '12345678',
-            mask: '########'
-          },
-          {
-            code: 'EAN8',
-            barcode: '12345678',
-            mask: '########'
-          },
-          {
-            code: 'EAN8',
-            barcode: '12345678',
-            mask: '########'
-          },
-          {
-            code: 'EAN8',
-            barcode: '12345678',
-            mask: '########'
-          },
-          {
-            code: 'EAN8',
-            barcode: '12345678',
-            mask: '########'
-          },
-          {
-            code: 'EAN8',
-            barcode: '12345678',
-            mask: '########'
-          },
-          {
-            code: 'EAN8',
-            barcode: '12345678',
-            mask: '########'
-          }
-        ]
+        cities
       },
       schema: {
         title: 'Test form title',
@@ -171,15 +110,6 @@ exports.getUpdateSchema = async (req, res) => {
               type: 'text'
             },
             component: 'input'
-          },
-          barcode: {
-            name: 'barcode',
-            title: 'barcode',
-            description: 'barcode',
-            rules: '',
-            props: [],
-            component: 'barcode',
-            formats: ['EAN8', 'EAN13']
           }
         },
         params: {
