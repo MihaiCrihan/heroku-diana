@@ -1,9 +1,6 @@
- module.exports = app => {
+module.exports = app => {
   let messages = []
-  const caches = {
-    all: {},
-    pushed: {}
-  }
+  let caches = {}
   const prepareData = (data) => {
     const date = new Date()
     data.date = `${date.getHours()}:${date.getMinutes()}`
@@ -35,26 +32,23 @@
 
   app.io.of('/caches')
     .on('connection', socket => {
-      socket.on('push', data => {
-        console.log(data)
-        caches.pushed = {}
-        for (const entityKey in data) {
-          if (data.hasOwnProperty(entityKey)) {
-            caches.all[entityKey] = data[entityKey]
-            caches.pushed[entityKey] = data[entityKey]
-          }
+      socket.emit('updated', caches)
+      socket.on('set', data => {
+        for (const entity of data.entities) {
+          caches[entity.name] = entity
         }
-
-        socket.emit('updated', caches.pushed)
-        socket.broadcast.emit('updated', caches.pushed)
-        console.log(caches.all)
+        socket.emit('updated', caches)
+        socket.broadcast.emit('updated', caches)
       })
 
-      socket.on('put', data => {
-        caches.all.splice()
-        caches.pushed = prepareData(data)
-        socket.emit('updated', caches.pushed)
-        socket.broadcast.emit('updated', caches.pushed)
+      socket.on('delete', (key) => {
+        if (key) {
+          caches[key] = undefined
+        } else {
+          caches = {}
+        }
+        socket.emit('updated', caches)
+        socket.broadcast.emit('updated', caches)
       })
 
       socket.on('get', () => {
