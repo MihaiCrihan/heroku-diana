@@ -1,4 +1,4 @@
-module.exports = app => {
+ module.exports = app => {
   let messages = []
   const caches = {
     all: {},
