@@ -1,8 +1,40 @@
-module.exports = app => {
+const Cache = require('../../models/caches')
+
+module.exports = async app => {
+  const get = async (category) => {
+    const cachesObject = {}
+    const caches = await Cache.aggregate([
+      {
+        $match: {
+          category
+        }
+      },
+      {
+        $project: {
+          _id: 0
+        }
+      }
+    ])
+
+    for (const entity of caches) {
+      cachesObject[entity.url] = await entity
+    }
+
+    return cachesObject
+  }
+
+  const create = async (cache) => {
+    await Cache.create(cache)
+  }
+
+  const remove = async (cache) => {
+    await Cache.findOneAndDelete({ ...cache })
+  }
+
   const caches = {
-    Filters: {},
-    Forms: {},
-    Locales: {}
+    Filters: await get('Filters'),
+    Forms: await get('Forms'),
+    Locales: await get('Locales')
   }
 
   app.io.of('/caches')
@@ -12,25 +44,51 @@ module.exports = app => {
         ...caches.Forms,
         ...caches.Locales
       })
+
       socket.on('set', data => {
-        console.log(data)
-        for (const entity of data.entities) {
-          caches[entity.category][entity.url] = entity
-        }
-        socket.emit('updated', {
-          ...caches.Filters,
-          ...caches.Forms,
-          ...caches.Locales
-        })
-        socket.broadcast.emit('updated', {
-          ...caches.Filters,
-          ...caches.Forms,
-          ...caches.Locales
-        })
+        create(data.entities)
+          .then(() => {
+            for (const entity of data.entities) {
+              caches[entity.category][entity.url] = entity
+              socket.emit('register', entity)
+              socket.broadcast.emit('register', entity)
+            }
+
+            socket.emit('updated', {
+              ...caches.Filters,
+              ...caches.Forms,
+              ...caches.Locales
+            })
+
+            socket.broadcast.emit('updated', {
+              ...caches.Filters,
+              ...caches.Forms,
+              ...caches.Locales
+            })
+          })
+          .catch((err) => {
+            console.log(err)
+          })
       })
 
-      socket.on('get', (data, callback) => {
-        callback && callback(caches[data.storeName][data.url])
+      socket.on('get', (data) => {
+        data && data(caches)
+      })
+
+      socket.on('delete', (data) => {
+        remove(data)
+          .then(() => {
+            caches[data.category][data.url] = undefined
+            socket.emit('register', 'lol')
+            socket.emit('updated', {
+              ...caches.Filters,
+              ...caches.Forms,
+              ...caches.Locales
+            })
+          })
+          .catch((err) => {
+            console.log(err)
+          })
       })
     })
 }
