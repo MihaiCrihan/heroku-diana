@@ -1,4 +1,4 @@
-const Caches = require('./modules/Caches')
+const Caches = require('./modules/caches')
 const Notifications = require('./modules/notifications')
 
 module.exports = app => {
