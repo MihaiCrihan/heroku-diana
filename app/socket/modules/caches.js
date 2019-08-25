@@ -28,7 +28,11 @@ module.exports = async app => {
   }
 
   const remove = async (cache) => {
-    await Cache.findOneAndDelete({ ...cache })
+    if (cache) {
+      await Cache.findOneAndDelete({ ...cache })
+    } else {
+      await Cache.deleteMany()
+    }
   }
 
   const caches = {
@@ -77,9 +81,14 @@ module.exports = async app => {
 
       socket.on('delete', (data) => {
         remove(data)
-          .then(() => {
-            caches[data.category][data.url] = undefined
-            socket.emit('register', 'lol')
+          .then(async () => {
+            if (data) {
+              caches[data.category][data.url] = await undefined
+            } else {
+              caches.Filters = await {}
+              caches.Forms = await {}
+              caches.Locales = await {}
+            }
             socket.emit('updated', {
               ...caches.Filters,
               ...caches.Forms,
