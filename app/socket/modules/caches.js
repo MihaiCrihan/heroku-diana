@@ -23,8 +23,17 @@ module.exports = async app => {
     return cachesObject
   }
 
-  const create = async (cache) => {
-    await Cache.create(cache)
+  const create = async (caches) => {
+    for (const cache of caches) {
+      const url = await cache.url
+      const item = await Cache.find({ url })
+
+      if (item.length) {
+        await Cache.updateOne({ url }, cache)
+      } else {
+        await Cache.create(cache)
+      }
+    }
   }
 
   const remove = async (cache) => {
