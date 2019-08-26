@@ -1,9 +1,8 @@
 const mongoose = require('mongoose')
-const db = require('../config/db')
 
 module.exports = () => {
   mongoose.connect(
-    db.url,
+    process.env.DB_URL,
     {
       useNewUrlParser: true,
       useCreateIndex: true

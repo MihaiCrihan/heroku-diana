@@ -13,8 +13,9 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 
-require('./database/connect')()
-require('./middleware/global')(app)
+require('custom-env').env()
+require('./database')()
+require('./middleware')(app)
 require('./routes')(app)
 require('./socket')(app)
 
