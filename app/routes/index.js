@@ -1,6 +1,6 @@
-const CountriesController = require('../controllers/countries')
-const CitiesController = require('../controllers/cities')
-const RegionsController = require('../controllers/regions')
+const CountriesController = require('./modules/countries')
+const CitiesController = require('./modules/cities')
+const RegionsController = require('./modules/regions')
 
 module.exports = app => {
   CountriesController(app)
