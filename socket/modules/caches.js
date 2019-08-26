@@ -1,6 +1,6 @@
 const Cache = require('../../models/caches')
 
-module.exports = async app => {
+module.exports = async (app) => {
   const get = async (category) => {
     const cachesObject = {}
     const caches = await Cache.aggregate([
@@ -17,7 +17,7 @@ module.exports = async app => {
     ])
 
     for (const entity of caches) {
-      cachesObject[entity.url] = await entity
+      cachesObject[entity.url] = entity
     }
 
     return cachesObject
@@ -25,7 +25,7 @@ module.exports = async app => {
 
   const create = async (caches) => {
     for (const cache of caches) {
-      const url = await cache.url
+      const url = cache.url
       const item = await Cache.find({ url })
 
       if (item.length) {
@@ -51,14 +51,14 @@ module.exports = async app => {
   }
 
   app.io.of('/caches')
-    .on('connection', socket => {
+    .on('connection', (socket) => {
       socket.emit('updated', {
         ...caches.Filters,
         ...caches.Forms,
         ...caches.Locales
       })
 
-      socket.on('set', data => {
+      socket.on('set', (data) => {
         create(data.entities)
           .then(() => {
             for (const entity of data.entities) {
@@ -90,13 +90,13 @@ module.exports = async app => {
 
       socket.on('delete', (data) => {
         remove(data)
-          .then(async () => {
+          .then(() => {
             if (data) {
-              caches[data.category][data.url] = await undefined
+              caches[data.category][data.url] = undefined
             } else {
-              caches.Filters = await {}
-              caches.Forms = await {}
-              caches.Locales = await {}
+              caches.Filters = {}
+              caches.Forms = {}
+              caches.Locales = {}
             }
             socket.emit('updated', {
               ...caches.Filters,

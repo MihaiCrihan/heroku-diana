@@ -1,25 +1,25 @@
-const CitiesService = require('../../controllers/cities')
+const CitiesController = require('../../controllers/cities')
 
-module.exports = app => {
+module.exports = (app) => {
   app.post('/cities', [
-    CitiesService.createCity
+    CitiesController.createCity
   ])
   app.get('/cities/create', [
-    CitiesService.getCreateSchema
+    CitiesController.getCreateSchema
   ])
   app.get('/cities/select', [
-    CitiesService.getCitiesSelect
+    CitiesController.getCitiesSelect
   ])
   app.get('/cities', [
-    CitiesService.getCities
+    CitiesController.getCities
   ])
   app.get('/cities/:id', [
-    CitiesService.getCityById
+    CitiesController.getCityById
   ])
   app.get('/cities/:id/edit', [
-    CitiesService.getUpdateSchema
+    CitiesController.getUpdateSchema
   ])
   app.patch('/cities/:id', [
-    CitiesService.updateCity
+    CitiesController.updateCity
   ])
 }

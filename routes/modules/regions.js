@@ -1,22 +1,22 @@
-const RegionsService = require('../../controllers/regions')
+const RegionsController = require('../../controllers/regions')
 
-module.exports = app => {
+module.exports = (app) => {
   app.post('/regions', [
-    RegionsService.createRegion
+    RegionsController.createRegion
   ])
   app.get('/regions/create', [
-    RegionsService.getCreateSchema
+    RegionsController.getCreateSchema
   ])
   app.get('/regions', [
-    RegionsService.getRegions
+    RegionsController.getRegions
   ])
   app.get('/regions/:id', [
-    RegionsService.getRegionById
+    RegionsController.getRegionById
   ])
   app.get('/regions/:id/edit', [
-    RegionsService.getUpdateSchema
+    RegionsController.getUpdateSchema
   ])
   app.patch('/regions/:id', [
-    RegionsService.updateRegion
+    RegionsController.updateRegion
   ])
 }

@@ -8,6 +8,18 @@ module.exports = {
     'node': true
   },
   'rules': {
+    'no-mixed-operators': 'error',
+    'object-shorthand': 'error',
+    'prefer-template': 'error',
+    'template-curly-spacing': 'error',
+    'arrow-parens': 'error',
+    'arrow-body-style': 'error',
+    'no-unneeded-ternary': 'error',
+    'newline-per-chained-call': 'error',
+    'no-whitespace-before-property': 'error',
+    'new-cap': 'error',
+    'no-else-return': 'error',
+    'implicit-arrow-linebreak': 'error',
     "capitalized-comments": [
       "error",
       "always"

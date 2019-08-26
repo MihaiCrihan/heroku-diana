@@ -1,16 +1,16 @@
-const CountriesService = require('../../controllers/countries')
+const CountriesController = require('../../controllers/countries')
 
-module.exports = app => {
+module.exports = (app) => {
   app.post('/countries', [
-    CountriesService.createCountry
+    CountriesController.createCountry
   ])
   app.get('/countries/create', [
-    CountriesService.getCreateSchema
+    CountriesController.getCreateSchema
   ])
   app.get('/countries/:id/edit', [
-    CountriesService.getUpdateSchema
+    CountriesController.getUpdateSchema
   ])
   app.patch('/countries/:id', [
-    CountriesService.updateCountry
+    CountriesController.updateCountry
   ])
 }

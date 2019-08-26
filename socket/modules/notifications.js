@@ -1,4 +1,4 @@
-module.exports = app => {
+module.exports = (app) => {
   let messages = []
 
   const prepareData = (data) => {
@@ -13,18 +13,18 @@ module.exports = app => {
     return data
   }
 
-  app.io.of('/messages').on('connection', socket => {
+  app.io.of('/messages').on('connection', (socket) => {
     socket.emit('newMessages', messages)
-    socket.on('createMessage', data => {
+    socket.on('createMessage', (data) => {
       messages.push(prepareData(data))
       socket.emit('newMessages', prepareData(data))
       socket.broadcast.emit('newMessages', prepareData(data))
     })
     socket.on('delete', (id, callback) => {
-      messages.splice(messages.findIndex(item => item.id === id), 1)
+      messages.splice(messages.findIndex((item) => item.id === id), 1)
       callback()
     })
-    socket.on('deleteAll', callback => {
+    socket.on('deleteAll', (callback) => {
       messages = []
       callback()
     })
