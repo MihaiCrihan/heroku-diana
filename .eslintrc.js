@@ -13,7 +13,6 @@ module.exports = {
     'prefer-template': 'error',
     'template-curly-spacing': 'error',
     'arrow-parens': 'error',
-    'arrow-body-style': 'error',
     'no-unneeded-ternary': 'error',
     'newline-per-chained-call': 'error',
     'no-whitespace-before-property': 'error',
