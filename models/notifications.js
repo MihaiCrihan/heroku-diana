@@ -15,8 +15,9 @@ exports.select = () => {
   return db.query(`SELECT * FROM Notifications`)
 }
 
-exports.selectById = (id) => {
-  return db.query(`SELECT * FROM Notifications WHERE id = '${id}'`)
+exports.selectById = async (id) => {
+  const item = await db.query(`SELECT * FROM Notifications WHERE id = '${id}'`)
+  return item[0]
 }
 
 exports.drop = () => {

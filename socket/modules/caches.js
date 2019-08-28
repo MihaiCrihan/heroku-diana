@@ -23,22 +23,20 @@ module.exports = async (app) => {
     return cachesObject
   }
 
-  const create = async (caches) => {
-    for (const cache of caches) {
-      const url = cache.url
-      const item = await Cache.find({ url })
+  const create = async (cache) => {
+    const url = cache.url
+    const item = await Cache.find({ url })
 
-      if (item.length) {
-        await Cache.updateOne({ url }, cache)
-      } else {
-        await Cache.create(cache)
-      }
+    if (item.length) {
+      await Cache.updateOne({ url }, cache)
+    } else {
+      await Cache.create(cache)
     }
   }
 
   const remove = async (cache) => {
     if (cache) {
-      await Cache.findOneAndDelete({ ...cache })
+      await Cache.findOneAndDelete({ url: cache.url })
     } else {
       await Cache.deleteMany()
     }
@@ -59,13 +57,11 @@ module.exports = async (app) => {
       })
 
       socket.on('set', (data) => {
-        create(data.entities)
+        create(data)
           .then(() => {
-            for (const entity of data.entities) {
-              caches[entity.category][entity.url] = entity
-              socket.emit('register', entity)
-              socket.broadcast.emit('register', entity)
-            }
+            caches[data.category][data.url] = data
+            socket.emit('register', data)
+            socket.broadcast.emit('register', data)
 
             socket.emit('updated', {
               ...caches.Filters,

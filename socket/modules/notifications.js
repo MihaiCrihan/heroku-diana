@@ -10,13 +10,12 @@ module.exports = async (app) => {
       socket.on('set', async (data) => {
         try {
           const inserted = await noticesModel.insert(data)
+          const item = await noticesModel.selectById(inserted.insertId)
 
-          data.id = inserted.insertId
-          data.say = Number(data.say)
-          notices.push(data)
+          notices.push(item)
 
-          socket.emit('updated', data)
-          socket.broadcast.emit('updated', data)
+          socket.emit('updated', item)
+          socket.broadcast.emit('updated', item)
         } catch (error) {
           socket.emit('error', error)
         }
@@ -36,15 +35,19 @@ module.exports = async (app) => {
         }
       })
 
-      socket.on('delete', async (id, callback) => {
+      socket.on('delete', async (data, callback) => {
         try {
-          if (id) {
-            await noticesModel.delete(id)
-            notices.splice(notices.findIndex((item) => item.id === id), 1)
+          if (data) {
+            await noticesModel.delete(data)
+            notices.splice(notices.findIndex((item) => item.id === data), 1)
+            socket.emit('updated', notices)
+            socket.broadcast.emit('updated', notices)
             callback()
           } else {
             await noticesModel.drop()
             notices = []
+            socket.emit('updated', notices)
+            socket.broadcast.emit('updated', notices)
             callback()
           }
         } catch (error) {
