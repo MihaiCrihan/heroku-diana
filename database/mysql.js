@@ -1,7 +1,7 @@
 const mysql = require('mysql')
 const config = require('../config/db')
 
-const connect = (sql) => {
+const query = (sql) => {
   return new Promise((resolve, reject) => {
     const connection = mysql.createConnection(config)
 
@@ -20,18 +20,6 @@ const connect = (sql) => {
         connection.end()
       }
     })
-  })
-}
-
-const query = (sql) => {
-  return new Promise((resolve, reject) => {
-    connect(sql)
-      .then((data) => {
-        resolve(data)
-      })
-      .catch((error) => {
-        reject(error)
-      })
   })
 }
 
