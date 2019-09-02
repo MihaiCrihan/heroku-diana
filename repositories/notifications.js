@@ -20,7 +20,7 @@ exports.selectById = async (id) => {
   return item[0]
 }
 
-exports.drop = () => {
+exports.truncate = () => {
   return db.query(`DELETE FROM notifications`)
 }
 

@@ -44,7 +44,7 @@ module.exports = async (app) => {
             socket.broadcast.emit('updated', notices)
             callback()
           } else {
-            await noticesRepository.drop()
+            await noticesRepository.truncate()
             notices = []
             socket.emit('updated', notices)
             socket.broadcast.emit('updated', notices)
