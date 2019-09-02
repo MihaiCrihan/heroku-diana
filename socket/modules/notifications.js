@@ -1,7 +1,7 @@
-const noticesModel = require('../../models/notifications')
+const noticesRepository = require('../../repositories/notifications')
 
 module.exports = async (app) => {
-  let notices = await noticesModel.select()
+  let notices = await noticesRepository.select()
 
   app.io.of('/notices')
     .on('connection', (socket) => {
@@ -9,8 +9,8 @@ module.exports = async (app) => {
 
       socket.on('set', async (data) => {
         try {
-          const inserted = await noticesModel.insert(data)
-          const item = await noticesModel.selectById(inserted.insertId)
+          const inserted = await noticesRepository.insert(data)
+          const item = await noticesRepository.selectById(inserted.insertId)
 
           notices.push(item)
 
@@ -23,7 +23,7 @@ module.exports = async (app) => {
 
       socket.on('update', async (id) => {
         try {
-          await noticesModel.update(id)
+          await noticesRepository.update(id)
           const index = notices.findIndex((item) => item.id === id)
 
           notices[index].say = 1
@@ -38,13 +38,13 @@ module.exports = async (app) => {
       socket.on('delete', async (data, callback) => {
         try {
           if (data) {
-            await noticesModel.delete(data)
+            await noticesRepository.delete(data)
             notices.splice(notices.findIndex((item) => item.id === data), 1)
             socket.emit('updated', notices)
             socket.broadcast.emit('updated', notices)
             callback()
           } else {
-            await noticesModel.drop()
+            await noticesRepository.drop()
             notices = []
             socket.emit('updated', notices)
             socket.broadcast.emit('updated', notices)
