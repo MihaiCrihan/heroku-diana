@@ -35,11 +35,8 @@ module.exports = async (app) => {
   }
 
   const remove = async (cache) => {
-    if (cache) {
-      await Cache.findOneAndDelete({ url: cache.url })
-    } else {
-      await Cache.deleteMany()
-    }
+    const url = cache.map((item) => item.url)
+    await Cache.deleteMany({ url })
   }
 
   const caches = {
@@ -87,12 +84,8 @@ module.exports = async (app) => {
       socket.on('delete', (data) => {
         remove(data)
           .then(() => {
-            if (data) {
-              caches[data.category][data.url] = undefined
-            } else {
-              caches.Filters = {}
-              caches.Forms = {}
-              caches.Locales = {}
+            for (const item of data) {
+              caches[item.category][item.url] = undefined
             }
             socket.emit('updated', {
               ...caches.Filters,
