@@ -3,13 +3,12 @@ module.exports = (app) => {
     .io
     .of('/register')
     .on('connection', (socket) => {
-      console.log('connect')
       socket.on('set', (data, callback) => {
         const user = app.io.of(`/${data}`)
 
         user.on('connection', (socket) => {
           socket.on('set', (data, callback) => {
-            socket.emit('updated', 'test')
+            socket.broadcast.emit('updated', 'test')
             callback()
           })
         })
