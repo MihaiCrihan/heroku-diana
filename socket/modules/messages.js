@@ -6,10 +6,15 @@ module.exports = async (app) => {
       socket.emit('updated', messages)
 
       socket.on('set', (data) => {
-        console.log(data)
-        messages.push(data)
+        messages.push({
+          ...data,
+          color: '#D32F2F'
+        })
         socket.emit('updated', data)
-        socket.broadcast.emit('updated', data)
+        socket.broadcast.emit('updated', {
+          ...data,
+          color: '#D32F2F'
+        })
       })
     })
 }
