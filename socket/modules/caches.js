@@ -92,6 +92,11 @@ module.exports = async (app) => {
               ...caches.Forms,
               ...caches.Locales
             })
+              socket.broadcast.emit('updated', {
+              ...caches.Filters,
+              ...caches.Forms,
+              ...caches.Locales
+            })
           })
           .catch((err) => {
             console.log(err)
