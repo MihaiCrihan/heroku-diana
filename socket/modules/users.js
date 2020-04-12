@@ -17,7 +17,7 @@ module.exports = (app) => {
       })
 
       socket.on('disconnect', () => {
-        console.log('disconnect')
+        // Console.log('disconnect')
       })
     })
 }
