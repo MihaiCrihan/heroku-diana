@@ -1,11 +1,4 @@
-const CountriesController = require('./modules/countries')
-const CitiesController = require('./modules/cities')
-const RegionsController = require('./modules/regions')
-const UploadController = require('./modules/upload')
-
+const ListController = require('./modules/list')
 module.exports = (app) => {
-  CountriesController(app)
-  CitiesController(app)
-  RegionsController(app)
-  UploadController(app)
+  ListController(app)
 }
