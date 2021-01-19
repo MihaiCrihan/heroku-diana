@@ -47,6 +47,10 @@ exports.post = async (req, res) => {
           errors[key].push('Поле должно содержать больше 3 символов')
         }
       }
+
+      if (key === 'execution_time') {
+
+      }
     }
 
     if (Object.values(errors).flat().length) {
@@ -68,13 +72,44 @@ exports.post = async (req, res) => {
 
 exports.put = async (req, res) => {
   try {
+    const errors = {
+      title: [],
+      body: [],
+      execution_time: []
+    }
+
+    for (const key in errors) {
+      if (!req.body[key]) {
+        errors[key].push('Поле обязательно для заполнения')
+      }
+
+      if (['title', 'body'].includes(key)) {
+        if (req.body[key] && req.body[key].length > 255) {
+          errors[key].push('Поле должно содержать меньше 255 символов')
+        }
+        if (req.body[key] && req.body[key].length < 3) {
+          errors[key].push('Поле должно содержать больше 3 символов')
+        }
+      }
+
+      if (key === 'execution_time') {
+
+      }
+    }
+
+    if (Object.values(errors).flat().length) {
+      res.status(422).send({
+        message: 'Ошибка валидации',
+        errors
+      })
+      return
+    }
+
     const updatedFields = Object.entries(req.body).map(([column, value]) => `${column} = '${value}'`)
       .join(', ')
 
     await db.query(`UPDATE todo_list SET ${updatedFields} WHERE id = ${req.params.id}`)
     const [insertedItem] = await db.query(`SELECT * FROM todo_list WHERE id = ${req.params.id}`)
-
-    res.send(insertedItem)
 
     if (insertedItem) {
       res.status(200).send(insertedItem)
