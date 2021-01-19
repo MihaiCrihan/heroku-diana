@@ -2,7 +2,7 @@ const db = require('../database/mysql')
 
 exports.getAll = async (req, res) => {
   try {
-    res.send(await db.query(`SELECT * FROM todo_list`))
+    res.status(200).send(await db.query(`SELECT * FROM todo_list`))
   } catch (err) {
     res.status(500).send(err.message)
   }
