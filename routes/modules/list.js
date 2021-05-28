@@ -25,16 +25,21 @@ module.exports = (app) => {
   ])
 
   /**
-   * @typedef Produs
-   * @property {string} denumire.required
-   * @property {integer} pret.required
+   * @typedef Profesori
+   * @property {string} Nume.required
+   * @property {integer} Prenume.required
+   * @property {string} data_nasterii.required
+   * @property {string} Adresa_domicil.required
+   * @property {string} adresa_email.required
+   * @property {integer} nr_telefon.required
    */
+  
 
   /**
    * This function comment is parsed by doctrine
    * @route POST /diana
    * @group get -  роут
-   * @param {Produs.model} body.body.required - the new produs
+   * @param {Profesori.model} body.body.required - the new professor
    * @returns {object} 200 - Данные об одном пользователе
    * @returns {Error}  default - Unexpected error
    */
@@ -48,7 +53,7 @@ module.exports = (app) => {
    * @route PATCH /diana/{id}
    * @group get -  этот роут
    * @param {string} id.path.required - id
-   * @param {Produs.model} body.body.required - the new produs
+   * @param {Profesori.model} body.body.required - the new professor
    * @returns {object} 200 - Данные об одном пользователе
    * @returns {Error}  default - Unexpected error
    */
