@@ -1,27 +1,23 @@
 const ListController = require('../../controllers/list')
 
 module.exports = (app) => {
-  app.get('/todo_list', [
+  app.get('/diana', [
     ListController.getAll
   ])
 
-  app.get('/todo_list/:id', [
+  app.get('/diana/:id', [
     ListController.get
   ])
 
-  app.post('/todo_list', [
+  app.post('/diana', [
     ListController.post
   ])
 
-  app.put('/todo_list/:id', [
-    ListController.put
-  ])
-
-  app.patch('/todo_list/:id', [
+  app.patch('/diana/:id', [
     ListController.patch
   ])
 
-  app.delete('/todo_list/:id', [
+  app.delete('/diana/:id', [
     ListController.delete
   ])
 }
