@@ -27,4 +27,4 @@ jobs:
         run: |
           rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" -avz * $USER@$HOST:$DIST
           ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no $USER@$HOST "npm --prefix $DIST install"
-          ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no $USER@$HOST "cd $DIST && pm2 restart www"
+          ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no $USER@$HOST "cd $DIST && pm2 restart app2"
