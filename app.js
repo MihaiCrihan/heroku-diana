@@ -13,7 +13,7 @@ const options = {
       title: 'Swagger',
       version: '1.0.0'
     },
-    host: 'https://app2.testways.online/',
+    host: 'https://app2.testways.online',
     basePath: '/',
     produces: [
       'application/json',
