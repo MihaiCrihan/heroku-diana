@@ -27,7 +27,7 @@ module.exports = (app) => {
   /**
    * @typedef Profesori
    * @property {string} Nume.required
-   * @property {integer} Prenume.required
+   * @property {string} Prenume.required
    * @property {string} data_nasterii.required
    * @property {string} Adresa_domicil.required
    * @property {string} adresa_email.required
