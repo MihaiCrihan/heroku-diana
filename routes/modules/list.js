@@ -4,8 +4,8 @@ module.exports = (app) => {
   /**
    * RETERTRETRETERTERTRETRETERTRET
    * @route GET /diana
-   * @group get - что то про этот роут
-   * @returns {object} 200 - Массив с какой то хуетой
+   * @group get -   этот роут
+   * @returns {object} 200 - Массив 
    * @returns {Error}  default - Unexpected error
    */
   app.get('/diana', [
@@ -15,8 +15,8 @@ module.exports = (app) => {
   /**
    * This function comment is parsed by doctrine
    * @route GET /diana/{id}
-   * @group get - что то про этот роут
-   * @param {string} id.path.required - idska
+   * @group get -  этот роут
+   * @param {string} id.path.required - id
    * @returns {object} 200 - Данные об одном пользователе
    * @returns {Error}  default - Unexpected error
    */
@@ -33,7 +33,7 @@ module.exports = (app) => {
   /**
    * This function comment is parsed by doctrine
    * @route POST /diana
-   * @group get - что то про этот роут
+   * @group get -  роут
    * @param {Produs.model} body.body.required - the new produs
    * @returns {object} 200 - Данные об одном пользователе
    * @returns {Error}  default - Unexpected error
@@ -46,8 +46,8 @@ module.exports = (app) => {
   /**
    * This function comment is parsed by doctrine
    * @route PATCH /diana/{id}
-   * @group get - что то про этот роут
-   * @param {string} id.path.required - idska
+   * @group get -  этот роут
+   * @param {string} id.path.required - id
    * @param {Produs.model} body.body.required - the new produs
    * @returns {object} 200 - Данные об одном пользователе
    * @returns {Error}  default - Unexpected error
@@ -59,8 +59,8 @@ module.exports = (app) => {
   /**
    * This function comment is parsed by doctrine
    * @route DELETE /diana/{id}
-   * @group get - что то про этот роут
-   * @param {string} id.path.required - idska
+   * @group get - этот роут
+   * @param {string} id.path.required - id
    * @returns {object} 200 - Данные об одном пользователе
    * @returns {Error}  default - Unexpected error
    */
